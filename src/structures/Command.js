@@ -14,12 +14,12 @@
 module.exports = class Command {
     /**
      *
-     * @param {import('../client/moosicClient')} client
+     * @param {import('../client/aquaClient')} client
      * @param {CommandOptions} options
      */
     constructor(client, options) {
         /**
-         * @type {import("../client/moosicClient")} Extended Client
+         * @type {import("../client/aquaClient")} Extended Client
          */
         this.client = client;
         this.name = options.name;

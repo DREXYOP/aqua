@@ -16,7 +16,7 @@ class Loader {
             categories.forEach((command) => {
                 const f = require(`../commands/${category}/${command}`);
                 const cmd = new f(this.client, f);
-                cmd.category = category;
+                // cmd.category = category;
                 cmd.file = f;
                 cmd.fileName = f.name;
                 this.client.commands.set(cmd.name, cmd);

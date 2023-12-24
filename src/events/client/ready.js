@@ -1,5 +1,5 @@
 const { ActivityType } = require('discord.js');
-
+const config = require("../../config.json")
 
 module.exports= {
   name: 'ready',
@@ -10,7 +10,7 @@ async execute(client) {
  
     
    
-    client.user.setActivity("-help", { type: ActivityType.Listening });
+    client.user.setActivity(`${client.prefix}help`, { type: ActivityType.Listening });
  
 } 
 };

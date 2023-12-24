@@ -1,18 +1,18 @@
-const Command = require("../../structures/Command.js");
+const Command = require('../../structures/Command');
 
-
-module.exports = class Ping extends Command {
+class Eval extends Command {
     constructor(client) {
         super(client, {
             name: 'eval',
             description: {
-                content: 'eval code through bot.',
-                usage: 'eval',
+                content: 'Evaluate code',
                 examples: ['eval'],
+                usage: 'eval',
             },
-            aliases: ['evl'],
-            category: 'developer',
+            category: 'dev',
+            aliases: ['ev'],
             cooldown: 3,
+            args: false,
             player: {
                 voice: false,
                 dj: false,
@@ -21,14 +21,25 @@ module.exports = class Ping extends Command {
             },
             permissions: {
                 dev: true,
-                client: ['SendMessages', 'ViewChannels', 'EmbedLinks'],
+                client: ['SendMessages', 'ViewChannel', 'EmbedLinks'],
                 user: [],
-                voteRequired: false,
             },
-            slashCommand: true,
+            slashCommand: false,
+            options: [],
         });
     }
     async run(ctx, args) {
-        
+        const code = args.join(' ');
+        try {
+            let evaled = eval(code);
+            if (typeof evaled !== 'string')
+                evaled = require('node:util').inspect(evaled);
+            ctx.sendMessage(`\`\`\`js\n${evaled}\n\`\`\``);
+        }
+        catch (e) {
+            ctx.sendMessage(`\`\`\`js\n${e}\n\`\`\``);
+        }
     }
-};
+}
+
+module.exports = Eval;

@@ -1,4 +1,4 @@
-const moosic  = require("./client/moosicClient.js");
+const moosic  = require("./client/aquaClient.js");
 new moosic(require("./config.json").token , require("./config.json"));
 
 process.on('unhandledRejection', (reason, p) => {

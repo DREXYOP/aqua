@@ -49,30 +49,7 @@ module.exports = {
                 }
             }
 
-            if (cmd.player) {
-                if (cmd.player.voice) {
-                    if (!interaction.member.voice.channel) return await interaction.reply({ content: `You must be connected to a voice channel to use \`${cmd.name}\` cmd.`, ephemeral: true }).catch(() => { });
-
-                    if (!interaction.guild.members.me.permissions.has(PermissionFlagsBits.Speak)) return await interaction.reply({ content: `I don't have \`CONNECT\` permissions to execute \`${cmd.name}\` cmd.`, ephemeral: true }).catch(() => { });
-
-                    if (!interaction.guild.members.me.permissions.has(PermissionFlagsBits.Speak)) return await interaction.reply({ content: `I don't have \`SPEAK\` permissions to execute \`${cmd.name}\` cmd.`, ephemeral: true }).catch(() => { });
-
-                    if (interaction.member.voice.channel.type === ChannelType.GuildStageVoice && !interaction.guild.members.me.permissions.has(PermissionFlagsBits.RequestToSpeak)) return await interaction.reply({ content: `I don't have \`REQUEST TO SPEAK\` permission to execute \`${cmd.name}\` cmd.`, ephemeral: true }).catch(() => { });
-
-                    if (interaction.guild.members.me.voice.channel) {
-                        if (interaction.guild.members.me.voice.channelId !== interaction.member.voice.channelId) return await interaction.reply({ content: `You are not connected to ${interaction.guild.members.me.voice.channel} to use \`${cmd.name}\` cmd.`, ephemeral: true }).catch(() => { });
-                    }
-                }
-
-                if (cmd.player.active) {
-                    if (!client.player.get(interaction.guildId)) return await interaction.reply({ content: 'Nothing is playing right now.', ephemeral: true }).catch(() => { });
-                    if (!client.player.get(interaction.guildId).queue) return await interaction.reply({ content: 'Nothing is playing right now.', ephemeral: true }).catch(() => { });
-                    if (!client.player.get(interaction.guildId).queue.current) return await interaction.reply({ content: 'Nothing is playing right now.', ephemeral: true }).catch(() => { });
-                }
-
-            }
-
-
+            
             try {
 
                 return await cmd.run(ctx, ctx.args);

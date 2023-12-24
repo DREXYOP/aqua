@@ -73,25 +73,7 @@ module.exports = {
             }
         }
 
-        if (command.player) {
-            if (command.player.voice) {
-                if (!message.member.voice.channel) return await message.reply({ content: `You must be connected to a voice channel to use \`${command.name}\` command.` });
-
-                if (!message.guild.members.me.permissions.has(PermissionFlagsBits.Speak)) return await message.reply({ content: `I don't have \`CONNECT\` permissions to execute \`${command.name}\` command.` });
-
-                if (!message.guild.members.me.permissions.has(PermissionFlagsBits.Speak)) return await message.reply({ content: `I don't have \`SPEAK\` permissions to execute \`${command.name}\` command.` });
-
-                if (message.member.voice.channel.type === ChannelType.GuildStageVoice && !message.guild.members.me.permissions.has(PermissionFlagsBits.RequestToSpeak)) return await message.reply({ content: `I don't have \`REQUEST TO SPEAK\` permission to execute \`${command.name}\` command.` });
-
-                if (message.guild.members.me.voice.channel) {
-                    if (message.guild.members.me.voice.channelId !== message.member.voice.channelId) return await message.reply({ content: `You are not connected to ${message.guild.members.me.voice.channel} to use \`${command.name}\` command.` });
-                }
-            }
-
-            if (command.player.active) {
-                if (!client.poru.players.get(message.guildId).currentTrack) return await message.reply({ content: 'Nothing is playing right now.' });
-            }
-        }
+       
         if (command.args) {
             if (!args.length) return await message.reply({ content: `Please provide the required arguments. \`${command.description.examples}\`` });
         }

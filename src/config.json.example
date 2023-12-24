@@ -1,0 +1,17 @@
+{
+  "token":"",
+  "owners": ["983787597627273267"],
+  "prefix":"a!",
+  "db":"",
+  "nodes": [
+    {
+      "name": "NODE_1",
+      "url":"lava1.horizxon.tech:433", 
+      "auth": "horizxon.tech",
+      "secure": true
+    }
+  ],
+  "color": "#2AE5DE",
+  "logs":false,
+  "searchEngine": "ytsearch"
+}
