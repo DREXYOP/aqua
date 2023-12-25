@@ -17,9 +17,9 @@
             }
         ],
         
-        "no-unused-vars": "off",
+        "no-unused-vars": "on",
         "no-console": "off",
-        "no-empty-function": "error",
+        "no-empty-function": "on",
         "no-floating-decimal": "error",
         "no-lonely-if": "error",
         "no-multi-spaces": "error",

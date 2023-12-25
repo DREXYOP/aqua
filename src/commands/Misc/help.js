@@ -51,14 +51,15 @@ module.exports = class Help extends Command {
             });
             const helpEmbed = embed
                 .setTitle('Help Menu')
+                .setThumbnail(`${this.client.user?.avatarURL()}`)
                 .setAuthor({
-                    name: `${this.client.user.username}`,
-                    iconURL: `${this.client.user.avatarURL()}`
+                    name: `${this.client.user?.username}`,
+                    iconURL: `${this.client.user?.avatarURL()}`
                 })
                 .setTimestamp()
-                .setDescription(`Hey It's Me ${this.client.user.username} a Versatile Music Bot With The Crisp of Awesome Music Quality With Over Powered Features`)
+                .setDescription(`Hey It's Me ${this.client.user?.username} a Versatile Music Bot With The Crisp of Awesome Music Quality With Over Powered Features`)
                 .setFooter({
-                    text: `thanks for choosing ${this.client.user.username}`,
+                    text: `thanks for choosing ${this.client.user?.username}`,
                     iconURL: `${this.client.user.avatarURL()}`
                 });
             fildes.forEach(field => helpEmbed.addFields(field));

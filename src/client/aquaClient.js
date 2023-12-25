@@ -1,8 +1,8 @@
 const BaseClient = require("../structures/BaseClient.js");
-const  Logger  = require("../structures/Logger.js");
-const { ClientEventHandler , MusicEventHandler } = require("../structures/EventHandler.js");
+const  Logger  = require("../Workers/Logger.js");
+const { ClientEventHandler , MusicEventHandler } = require("../Workers/EventHandler.js");
 const { Collection , EmbedBuilder } = require("discord.js");
-const { Loader } = require("../structures/Loaders.js");
+const { Loader } = require("../Workers/Loaders.js");
 const { ClusterClient } = require('discord-hybrid-sharding');
 const { DataBase } = require("../Database/connect.js");
 const Utils = require("../Extra/Utils.js");

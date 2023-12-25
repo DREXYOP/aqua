@@ -1,16 +1,23 @@
 const { ActivityType } = require('discord.js');
 const config = require("../../config.json")
 
-module.exports= {
+module.exports = {
   name: 'ready',
   once: true,
-async execute(client) {
-  client.logger.log("API",`${client.user.username} is ready with ${client.guilds.cache.size} server`)
-   
- 
-    
-   
-    client.user.setActivity(`${client.prefix}help`, { type: ActivityType.Listening });
- 
-} 
+  async execute(client) {
+    client.logger.log("API", `${client.user.username} is ready with ${client.guilds.cache.size} server`)
+
+
+    client.user?.setPresence({
+      activities: [
+        {
+          name: `${client.prefix}help`,
+          type:  ActivityType.Listening,
+        },
+      ],
+      status: `idle`,
+    });
+
+
+  }
 };

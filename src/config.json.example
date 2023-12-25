@@ -13,5 +13,6 @@
   ],
   "color": "#2AE5DE",
   "logs":false,
-  "searchEngine": "ytsearch"
+  "searchEngine": "ytsearch",
+  "clientID":"985530826429190175"
 }

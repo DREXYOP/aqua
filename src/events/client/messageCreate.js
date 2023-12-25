@@ -40,7 +40,7 @@ module.exports = {
 
         const args = message.content.slice(matchedPrefix.length).trim().split(/ +/g);
         const commandName = args.shift().toLowerCase();
-        const command = client.commands.get(commandName) || client.commands.get(client.aliases.get(commandName));
+        const command = client.commands.get(commandName) || client.aliases.get(commandName);
 
         ctx.setArgs(args);
 

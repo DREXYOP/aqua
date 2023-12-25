@@ -1,5 +1,5 @@
 /* eslint-disable no-empty-function */
-const { Message, CommandInteraction, EmbedBuilder, User, Guild, GuildMember, CommandInteractionOptionResolver, TextChannel, VoiceChannel, ThreadChannel, DMChannel } = require('discord.js');
+const {Client, Message, CommandInteraction, EmbedBuilder, User, Guild, GuildMember, CommandInteractionOptionResolver, TextChannel, VoiceChannel, ThreadChannel, DMChannel } = require('discord.js');
 
 module.exports = class Context {
     /**
@@ -46,7 +46,9 @@ module.exports = class Context {
         this.guildId = ctx.guildId;
         
         this.ping = ctx.client.ws.ping;
-
+        /**
+         * @type {Client}
+         */
         this.client = ctx.client;
         /**
          * @type {User}

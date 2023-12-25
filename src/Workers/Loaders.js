@@ -38,7 +38,7 @@ class Loader {
                             : 0;
                     ++i;
                 }
-                this.client.logger.log("Comamnds", `Successfully loaded ${i} slash commands .`);
+                this.client.logger.log("Comamnds", `Successfully loaded ${i} ${cmd.name} .`);
             });
         });
 
@@ -49,7 +49,7 @@ class Loader {
         rest
             .put(
                 Routes.applicationCommands(
-                    this.client.user ? this.client.user.id : "985530826429190175",
+                    this.client.user ? this.client.user.id : this.client.config.clientID,
                 ),
                 { body: data },
             )
