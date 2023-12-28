@@ -7,11 +7,11 @@ module.exports = class Ping extends Command {
             name: 'ping',
             description: {
                 content: 'Returns the latency of the bot.',
-                usage: 'misc',
+                usage: '{prefix}ping',
                 examples: ['ping'],
             },
             aliases: ['pong'],
-            category: 'general',
+            category: 'Misc',
             cooldown: 3,
             player: {
                 voice: false,

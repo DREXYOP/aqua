@@ -11,7 +11,7 @@ class Info extends Command {
             description: {
                 content: 'Ingormation about the bot',
                 examples: ['info'],
-                usage: 'info',
+                usage: '{prefix}info',
             },
             category: 'Misc',
             aliases: ['botinfo', 'bi'],

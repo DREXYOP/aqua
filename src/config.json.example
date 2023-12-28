@@ -15,4 +15,6 @@
   "logs":false,
   "searchEngine": "ytsearch",
   "clientID":"985530826429190175"
+  "supportUri":"https://discord.gg/aqua-music-support-842773814290022490",
+  "disstat_apiKey":"Disstat_api_key"
 }

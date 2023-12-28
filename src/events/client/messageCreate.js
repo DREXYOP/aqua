@@ -1,4 +1,5 @@
 const Context = require("../../structures/Context.js");
+const prefixData = require("../../schemas/prefixSchema.js")
 
 const {
     CommandInteraction,
@@ -25,16 +26,16 @@ module.exports = {
         
 
         const ctx = new Context(message);
-
+        const prefix = await prefixData.findOne({guildId:message.guild.id});
         const mention = new RegExp(`^<@!?${client.user.id}>( |)$`);
         if (message.content.match(mention)) {
             if (message.channel.permissionsFor(client.user).has([PermissionFlagsBits.SendMessages, PermissionFlagsBits.EmbedLinks, PermissionFlagsBits.ViewChannel])) {
-                return await message.reply({ content: `Hey, my prefix for this server is \`${client.prefix}\` Want more info? then do \`${client.prefix}help\`\nStay Safe, Stay Awesome!` }).catch(() => { });
+                return await message.reply({ content: `Hey, my prefix for this server is \`${prefix ? prefix.prefix : client.prefix}\` Want more info? then do \`${prefix ? prefix.prefix : client.prefix}help\`\nStay Safe, Stay Awesome!` }).catch((err) => {console.log(err)});
             }
         }
 
         // const escapeRegex = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-        const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|${client.prefix})\\s*`);
+        const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|${prefix ? prefix.prefix : client.prefix})\\s*`);
         if (!prefixRegex.test(message.content)) return;
         const [matchedPrefix] = message.content.match(prefixRegex);
 

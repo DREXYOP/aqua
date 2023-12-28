@@ -1,0 +1,8 @@
+{
+    "client_events": true,
+    "disstat_events": true,
+    "music_events": true,
+    "database": true,
+    "commands": true,
+    "main_bot_power": true
+}

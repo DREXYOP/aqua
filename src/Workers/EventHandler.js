@@ -11,7 +11,7 @@ const {join} = require("path")
 
     start() {
         const eventFiles = readdirSync(join(__dirname, "..","events","client")).filter(file => file.endsWith('.js'));
-     let nic = 0;
+        let nic = 0;
         for (const file of eventFiles) {
             
             const event = require(`../events/client/${file}`);
@@ -25,7 +25,7 @@ const {join} = require("path")
         this.client.logger.debug('Client EVENTS', `Loaded ${nic} events`)
     }
     
-}
+};
 
 
  class MusicEventHandler {
@@ -37,7 +37,7 @@ const {join} = require("path")
 
     start() {
         const eventFiles = readdirSync(join(__dirname, "..","events","music")).filter(file => file.endsWith('.js'));
-     let nic = 0;
+        let nic = 0;
         for (const file of eventFiles) {
             
             let event = require(`../events/music/${file}`);
@@ -48,6 +48,26 @@ const {join} = require("path")
         this.client.logger.debug('Music EVENTS', `Loaded ${nic} events`)
     }
     
-}
+};
 
-module.exports = {ClientEventHandler,MusicEventHandler}
+class disstatEventHandler{
+    constructor(client){
+        this.client = client;
+        
+        client.logger.debug('Disstat EVENTS', 'Loading events')
+    }
+    start(){
+        const eventFiles = readdirSync(join(__dirname, "..","events","disstat")).filter(file => file.endsWith('.js'));
+        let nic = 0;
+        for (const file of eventFiles) {
+            
+            let event = require(`../events/disstat/${file}`);
+        
+        this.client.stats.on(event.name, (...args) => event.execute(this.client , ...args));
+            nic++;
+        }
+        this.client.logger.debug('Disstat EVENTS', `Loaded ${nic} events`)
+    }
+};
+
+module.exports = {ClientEventHandler,MusicEventHandler,disstatEventHandler}
