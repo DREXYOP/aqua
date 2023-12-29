@@ -10,9 +10,9 @@ class musicClient extends Shoukaku{
             restTimeout: 10000,
         });
         this.client = client;
-        this.on('ready', (name, resumed) =>
+        this.on('ready', (name, resumed) =>{
             this.client.shoukaku.emit(resumed ? 'nodeReconnect' : 'nodeConnect', this.client.shoukaku.getNode(name))
-        );
+        });
 
         this.on('error', (name, error) => this.client.shoukaku.emit('nodeError', name, error));
         this.on('close', (name, code, reason) => this.client.shoukaku.emit('nodeDestroy', name, code, reason));

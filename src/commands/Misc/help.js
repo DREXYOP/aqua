@@ -1,4 +1,5 @@
 const Command = require("../../structures/Command.js");
+const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js')
 
 
 module.exports = class Help extends Command {
@@ -29,8 +30,22 @@ module.exports = class Help extends Command {
         });
     }
     async run(ctx, args) {
-        
+        this.client = ctx.client;
         const embed = this.client.embed();
+        const row = new ActionRowBuilder().addComponents(
+            new ButtonBuilder()
+                .setLabel(`Get ${this.client.user?.username}`)
+                .setStyle(ButtonStyle.Link)
+                .setURL(`https://discord.com/api/oauth2/authorize?client_id=${this.client.user?.id}&permissions=${this.client.config.inv_perms}&scope=bot%20applications.commands`),
+            new ButtonBuilder()
+                .setLabel('Support Server')
+                .setStyle(ButtonStyle.Link)
+                .setURL(`${this.client.config.supportUri}`),
+            new ButtonBuilder()
+                .setLabel('Vote Me')
+                .setStyle(ButtonStyle.Link)
+                .setURL(`${this.client.config.topggUri}`)
+        );
         const prefix = this.client.prefix;
         // const msg = await ctx.sendDeferMessage('Fetching all commands...');
         const commands = this.client.commands.filter(cmd => cmd.category !== 'dev');
@@ -63,7 +78,7 @@ module.exports = class Help extends Command {
                     iconURL: `${this.client.user.avatarURL()}`
                 });
             fildes.forEach(field => helpEmbed.addFields(field));
-            ctx.sendMessage({ embeds: [helpEmbed] });
+            ctx.sendMessage({ embeds: [helpEmbed], components:[row]});
         }
 
     }

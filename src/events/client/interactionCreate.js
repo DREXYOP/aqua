@@ -48,6 +48,75 @@ module.exports = {
 
                 }
             }
+            if (cmd.player) {
+                if (cmd.player.voice) {
+                    if (!interaction.member.voice.channel)
+                        return await interaction.reply({
+                            content: `:x: You must be connected to a voice channel to use the \`${cmd.name}\` command!`,
+                        });
+                    if (!interaction.guild.members.me.permissions.has(PermissionFlagsBits.Speak))
+                        return await interaction.reply({
+                            content: `:x: I don't have \`CONNECT\` permissions to execute \`${cmd.name}\` command.`,
+                        });
+                    if (!interaction.guild.members.me.permissions.has(PermissionFlagsBits.Speak))
+                        return await interaction.reply({
+                            content: `:x: I don't have \`SPEAK\` permissions to execute \`${cmd.name}\` command.`,
+                        });
+                    if (interaction.member.voice.channel.type ===
+                        ChannelType.GuildStageVoice &&
+                        !interaction.guild.members.me.permissions.has(PermissionFlagsBits.RequestToSpeak))
+                        return await interaction.reply({
+                            content: `:x: I don't have \`REQUEST TO SPEAK\` permission to execute \`${cmd.name}\` command.`,
+                        });
+                    if (interaction.guild.members.me.voice.channel) {
+                        if (interaction.guild.members.me.voice.channelId !== interaction.member.voice.channelId)
+                            return await interaction.reply({
+                                content: `:x: You are not connected to the same voice channel as me <#${interaction.guild.members.me.voice.channel.id}> to use \`${cmd.name}\` command.`,
+                            });
+                    }
+                }
+                if (cmd.player.active) {
+                    if (!client.queue.get(interaction.guildId))
+                        return await interaction.reply({
+                            content: 'Nothing is playing right now.',
+                        });
+                    if (!client.queue.get(interaction.guildId).queue)
+                        return await interaction.reply({
+                            content: 'Nothing is playing right now.',
+                        });
+                    if (!client.queue.get(interaction.guildId).current)
+                        return await interaction.reply({
+                            content: 'Nothing is playing right now.',
+                        });
+                }
+            }
+            if (!client.cooldowns.has(commandName)) {
+                client.cooldowns.set(commandName, new Collection());
+            }
+            const now = Date.now();
+            const timestamps = client.cooldowns.get(commandName);
+            const cooldownAmount = Math.floor(command.cooldown || 5) * 1000;
+            if (!timestamps.has(interaction.user.id)) {
+                timestamps.set(interaction.user.id, now);
+                setTimeout(() => timestamps.delete(interaction.user.id), cooldownAmount);
+            }
+            else {
+                const expirationTime = timestamps.get(interaction.user.id) + cooldownAmount;
+                const timeLeft = (expirationTime - now) / 1000;
+                if (now < expirationTime && timeLeft > 0.9) {
+                    return await interaction.reply({
+                        content: `Please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${commandName}\` command.`,
+                    });
+                }
+                timestamps.set(interaction.user.id, now);
+                setTimeout(() => timestamps.delete(interaction.user.id), cooldownAmount);
+            }
+            if (interaction.options.data.some(option => option.value && option.value.toString().includes('@everyone')) ||
+                interaction.options.data.some(option => option.value && option.value.toString().includes('@here')))
+                return await interaction.reply({
+                    content: 'You can\'t mention everyone or here.',
+                    ephemeral: true,
+                });
 
             
             try {

@@ -27,7 +27,7 @@
     "moment": "^2.29.4",
     "mongoose": "^7.2.0",
     "ms": "^2.1.3",
-    "shoukaku": "^4.0.1",
+    "shoukaku": "^3.4.2",
     "shoukaku-sources": "^1.0.4"
   }
 }
