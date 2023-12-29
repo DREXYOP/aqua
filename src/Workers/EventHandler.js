@@ -50,24 +50,24 @@ const {join} = require("path")
     
 };
 
-class disstatEventHandler{
-    constructor(client){
-        this.client = client;
+// class disstatEventHandler{
+//     constructor(client){
+//         this.client = client;
         
-        client.logger.debug('Disstat EVENTS', 'Loading events')
-    }
-    start(){
-        const eventFiles = readdirSync(join(__dirname, "..","events","disstat")).filter(file => file.endsWith('.js'));
-        let nic = 0;
-        for (const file of eventFiles) {
+//         client.logger.debug('Disstat EVENTS', 'Loading events')
+//     }
+//     start(){
+//         const eventFiles = readdirSync(join(__dirname, "..","events","disstat")).filter(file => file.endsWith('.js'));
+//         let nic = 0;
+//         for (const file of eventFiles) {
             
-            let event = require(`../events/disstat/${file}`);
+//             let event = require(`../events/disstat/${file}`);
         
-        this.client.stats.on(event.name, (...args) => event.execute(this.client , ...args));
-            nic++;
-        }
-        this.client.logger.debug('Disstat EVENTS', `Loaded ${nic} events`)
-    }
-};
+//         this.client.stats.on(event.name, (...args) => event.execute(this.client , ...args));
+//             nic++;
+//         }
+//         this.client.logger.debug('Disstat EVENTS', `Loaded ${nic} events`)
+//     }
+// };
 
-module.exports = {ClientEventHandler,MusicEventHandler,disstatEventHandler}
+module.exports = {ClientEventHandler,MusicEventHandler}

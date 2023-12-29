@@ -1,13 +1,14 @@
 const BaseClient = require("../structures/BaseClient.js");
 const Logger  = require("../Workers/Logger.js");
-const { ClientEventHandler , MusicEventHandler , disstatEventHandler } = require("../Workers/EventHandler.js");
+const { ClientEventHandler , MusicEventHandler } = require("../Workers/EventHandler.js");
 const { Collection , EmbedBuilder } = require("discord.js");
 const { Loader } = require("../Workers/Loaders.js");
 const { ClusterClient } = require('discord-hybrid-sharding');
 const { DataBase } = require("../Database/connect.js");
-const Stats = require("../structures/Distat.js")
 const Utils = require("../Extra/Utils.js");
-const control_panel = require("../../control_panel.json")
+const control_panel = require("../../control_panel.json");
+const musicClient = require("./musicClient.js");
+const Queue = require("../structures/Queue.js");
 
 
 module.exports = class aquaClient extends BaseClient {
@@ -22,17 +23,15 @@ module.exports = class aquaClient extends BaseClient {
         this.cooldowns = new Collection();
         this.cluster = new ClusterClient(this);
         this.utils = new Utils();
+        this.shoukaku = new musicClient(this);
+        this.queue = new Queue(this);
         this.controls = control_panel;
         if(this.controls.database)
             new DataBase(this).connect();
         if(this.controls.client_events)
             new ClientEventHandler(this).start();
-        if(this.controls.disstat_events){
-            this.stats = new Stats(this);
-            new disstatEventHandler(this);
-        };
         if(this.controls.music_events){
-            // new MusicEventHandler(this).start();
+            new MusicEventHandler(this).start();
         };
         if(this.controls.commands){
             new Loader(this).loadCommands();

@@ -10,7 +10,7 @@ class Prefix extends Command {
                 examples: ['prefix set', 'prefix reset', 'prefix set !'],
                 usage: '{prefix}prefix set, {prefix}prefix reset, {prefix}prefix set !',
             },
-            category: 'general',
+            category: 'Misc',
             aliases: ['prefix'],
             cooldown: 3,
             args: true,
