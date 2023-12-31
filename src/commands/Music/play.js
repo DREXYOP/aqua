@@ -38,6 +38,8 @@ class Play extends Command {
             ],
         });
     }
+
+    
     async run(ctx, args) {
         this.client = ctx.client;
         const query = args.join(' ');

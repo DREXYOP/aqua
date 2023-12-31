@@ -23,6 +23,7 @@ class Queue extends Map {
         return super.clear();
     }
 
+
     async create(guild, voice, channel, givenNode) {
         let dispatcher = this.get(guild.id);
         if (!voice) throw new Error('No voice channel was provided');
@@ -30,7 +31,7 @@ class Queue extends Map {
         if (!guild) throw new Error('No guild was provided');
 
         if (!dispatcher) {
-            const node = givenNode || this.client.shoukaku.getNode();
+            const node = givenNode || this.client.shoukaku.getNode();;
             const player = await node.joinChannel({
                 guildId: guild.id,
                 channelId: voice.id,
@@ -55,10 +56,9 @@ class Queue extends Map {
     }
 
     async search(query) {
-        const node = this.client.shoukaku.getNode();
         const regex = /^https?:\/\//;
         let result;
-
+        const node = this.client.shoukaku.getNode();
         try {
             result = await node.rest.resolve(
                 regex.test(query) ? query : `${this.client.config.searchEngine}:${query}`
