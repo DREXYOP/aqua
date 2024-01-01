@@ -10,7 +10,7 @@ class Song {
         if (this.info && this.info.requester === undefined)
             this.info.requester = user;
         if (track.info.sourceName === 'youtube') {
-            track.info.thumbnail = `https://img.youtube.com/vi/${track.info.identifier}/hqdefault.jpg`;
+            track.info.thumbnail = `https://img.youtube.com/v1/${track.info.identifier}/hqdefault.jpg`;
         } else if (track.info.sourceName === 'spotify') {
             new Spotify().getTrack(track.info.uri).then((res) => {
                 this.info.thumbnail = res.album && res.album.images ? res.album.images[0] ? res.album.images[0].url : null : null;

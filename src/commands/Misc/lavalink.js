@@ -10,7 +10,7 @@ class LavaLink extends Command {
                 usage: 'lavalink',
             },
             category: 'Misc',
-            aliases: ['ll'],
+            aliases: ['ll','node'],
             cooldown: 3,
             args: false,
             player: {

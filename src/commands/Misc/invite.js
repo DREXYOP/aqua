@@ -44,6 +44,10 @@ module.exports = class Ping extends Command {
         return await ctx.sendMessage({
             embeds: [
                 embed
+                    .setAuthor({
+                        name: `${this.client.user?.username}`,
+                        iconURL: `${this.client.user?.avatarURL()}`
+                    })
                     .setDescription(`You can invite me by clicking the button below. Any bugs or outages? Join the support server!`),
             ],
             components: [row],

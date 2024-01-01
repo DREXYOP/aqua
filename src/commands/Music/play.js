@@ -1,12 +1,13 @@
 const Command = require('../../structures/Command')
+// /(http:|https:)?\/\/(www\.|music\.)?(youtube.com|youtu.be)/i
 class Play extends Command {
     constructor(client) {
         super(client, {
             name: 'play',
             description: {
-                content: 'Plays a song from YouTube or Spotify',
+                content: 'Plays a song from Spotify, Soundcloud , ect.',
                 examples: [
-                    'play https://www.youtube.com/watch?v=QH2-TGUlwu4',
+                    'play xyz',
                     'play https://open.spotify.com/track/6WrI0LAC5M1Rw2MnX2ZvEg',
                 ],
                 usage: 'play <song>',
@@ -73,8 +74,8 @@ class Play extends Command {
                     return await ctx.sendMessage({
                         embeds: [
                             embed
-                                .setColor(this.client.color.red)
-                                .setDescription(`The queue is too long. The maximum length is ${client.config.maxQueueSize} songs.`),
+                                .setColor('red')
+                                .setDescription(`The queue is too long. The maximum length is ${ctx.client.config.maxQueueSize} songs.`),
                         ],
                     });
                 player.queue.push(track);
@@ -82,13 +83,13 @@ class Play extends Command {
                 ctx.sendMessage({
                     embeds: [
                         embed
-                            .setDescription(`Added [${res.tracks[0].info.title}](${res.tracks[0].info.uri}) to the queue.`),
+                            .setDescription(`Added [${res.tracks[0].info.title}](${ctx.client.config.topggUri}) to the queue.`),
                     ],
                 });
                 break;
             }
             case 'PLAYLIST_LOADED':
-                if (res.length > client.config.maxPlaylistSize)
+                if (res.length > ctx.client.config.maxPlaylistSize)
                     return await ctx.sendMessage({
                         embeds: [
                             embed
@@ -110,7 +111,7 @@ class Play extends Command {
                 ctx.sendMessage({
                     embeds: [
                         embed
-                            .setDescription(`Added ${res.tracks.length} songs to the queue.`),
+                            .setDescription(`Added ${res.tracks.length} songs to the queue. \n added by <@${ctx.author.id}>`),
                     ],
                 });
                 break;
@@ -128,7 +129,7 @@ class Play extends Command {
                 ctx.sendMessage({
                     embeds: [
                         embed
-                            .setDescription(`Added [${res.tracks[0].info.title}](${res.tracks[0].info.uri}) to the queue.`),
+                            .setDescription(`Added [${res.tracks[0].info.title}](${ctx.client.config.topggUri}) to the queue. \n Requested by <@${ctx.author.id}>`),
                     ],
                 });
                 break;

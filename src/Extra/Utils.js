@@ -44,8 +44,8 @@ module.exports = class Utils {
         const percent = Math.round((current / total) * 100);
         const filledSize = Math.round((size * current) / total);
         const emptySize = size - filledSize;
-        const filledBar = '▓'.repeat(filledSize);
-        const emptyBar = '░'.repeat(emptySize);
+        const filledBar = '-'.repeat(filledSize);
+        const emptyBar = '_'.repeat(emptySize);
         const progressBar = `${filledBar}${emptyBar} ${percent}%`;
         return progressBar;
     }

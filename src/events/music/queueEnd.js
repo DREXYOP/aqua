@@ -3,6 +3,7 @@ module.exports = {
     async run(client, player, track, dispatcher) {
         const guild = client.guilds.cache.get(dispatcher.guildId);
         if (!guild) return;
+        // const channel = guild.channels.cache.get()
 
         if (dispatcher.loop === 'repeat') dispatcher.queue.unshift(track);
         if (dispatcher.loop === 'queue') dispatcher.queue.push(track);

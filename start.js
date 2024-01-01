@@ -6,7 +6,8 @@ const manager = new ClusterManager(`${__dirname}/src/index.js`, {
     totalShards: "auto",
     token: token,
     mode: "process",
-    shardsPerClusters: 2
+    totalClusters: "auto",
+    shardsPerClusters: 10
 });
 
 manager.on("clusterCreate", (cluster) => {

@@ -2,19 +2,22 @@
   "token":"",
   "owners": ["983787597627273267"],
   "prefix":"a!",
-  "db":"",
+  "db":"mongodb+srv://debadithya:debadithya@cluster0.pme4jf7.mongodb.net/aqua?retryWrites=true&w=majority",
   "nodes": [
     {
       "name": "NODE_1",
-      "url":"lava1.horizxon.tech:433", 
-      "auth": "horizxon.tech",
-      "secure": true
+      "url":"n1.ll.darrennathanael.com:2269", 
+      "auth": "glasshost1984",
+      "secure": false
     }
   ],
   "color": "#2AE5DE",
   "logs":false,
   "searchEngine": "ytsearch",
-  "clientID":"985530826429190175"
+  "maxQueueSize":10,
+  "maxPlaylistSize":15,
+  "topggUri":"https://top.gg/bot/777165206203007017/vote",
+  "clientID":"985530826429190175",
   "supportUri":"https://discord.gg/aqua-music-support-842773814290022490",
   "disstat_apiKey":"Disstat_api_key"
 }

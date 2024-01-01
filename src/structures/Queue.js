@@ -31,7 +31,7 @@ class Queue extends Map {
         if (!guild) throw new Error('No guild was provided');
 
         if (!dispatcher) {
-            const node = givenNode || this.client.shoukaku.getNode();;
+            const node = givenNode || this.client.shoukaku.getNode();
             const player = await node.joinChannel({
                 guildId: guild.id,
                 channelId: voice.id,

@@ -14,23 +14,28 @@ module.exports = {
             const previousButton = new ButtonBuilder()
                 .setCustomId('previous')
                 .setEmoji('⏪')
+                // .setLabel('Previous')
                 .setStyle(ButtonStyle.Secondary)
                 .setDisabled(dispatcher.previous ? false : true);
             const resumeButton = new ButtonBuilder()
                 .setCustomId('resume')
                 .setEmoji(player.paused ? '▶️' : '⏸️')
+                // .setLabel(player.paused ? 'Resume' : 'Pause')
                 .setStyle(player.paused ? ButtonStyle.Success : ButtonStyle.Secondary);
             const stopButton = new ButtonBuilder()
                 .setCustomId('stop')
                 .setEmoji('⏹️')
+                // .setLabel('Stop')
                 .setStyle(ButtonStyle.Danger);
             const skipButton = new ButtonBuilder()
                 .setCustomId('skip')
                 .setEmoji('⏩')
-                .setStyle(ButtonStyle.Secondary);
+                // .setLabel('Skip')
+                .setStyle(ButtonStyle.Secondary)
             const loopButton = new ButtonBuilder()
                 .setCustomId('loop')
                 .setEmoji(dispatcher.loop === 'repeat' ? '🔂' : '🔁')
+                // .setLabel(dispatcher.loop === 'repeat' ? 'Loop Off' : 'Loop On')
                 .setStyle(dispatcher.loop !== 'off' ? ButtonStyle.Success : ButtonStyle.Secondary);
             return new ActionRowBuilder().addComponents(previousButton, resumeButton, stopButton, skipButton, loopButton);
         }
@@ -130,7 +135,8 @@ module.exports = {
                                     }),
                                 ],
                                 components: [],
-                            });
+                            }).setTime;
+                        
                         break;
                     case 'skip':
                         if (!dispatcher.queue.length) {

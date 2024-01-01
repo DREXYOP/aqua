@@ -30,6 +30,6 @@ module.exports = class Ping extends Command {
     }
     async run(ctx, args) {
         const msg = await ctx.sendDeferMessage('Pinging...');
-        return await ctx.editMessage(`API Latency: \`${Math.round(ctx.ping)}ms.\``);
+        return await ctx.editMessage(`API Latency is: \`${Math.round(ctx.ping)}ms.\``);
     }
 };
