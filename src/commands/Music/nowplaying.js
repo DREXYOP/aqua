@@ -9,7 +9,7 @@ class Nowplaying extends Command {
                 examples: ['nowplaying'],
                 usage: 'nowplaying',
             },
-            category: 'music',
+            category: 'Music',
             aliases: ['np'],
             cooldown: 3,
             args: false,

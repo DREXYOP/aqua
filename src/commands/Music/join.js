@@ -9,7 +9,7 @@ class Join extends Command {
                 examples: ['join'],
                 usage: 'join',
             },
-            category: 'music',
+            category: 'Music',
             aliases: ['j'],
             cooldown: 3,
             args: false,

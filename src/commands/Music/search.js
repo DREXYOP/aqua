@@ -1,0 +1,113 @@
+const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
+const Command = require('../../structures/Command');
+
+class Search extends Command {
+    constructor(client) {
+        super(client, {
+            name: 'search',
+            description: {
+                content: 'Searches for a song',
+                examples: ['search', 'search <song>'],
+                usage: 'search',
+            },
+            category: 'Music',
+            aliases: ['search'],
+            cooldown: 3,
+            args: true,
+            player: {
+                voice: true,
+                dj: false,
+                active: false,
+                djPerm: null,
+            },
+            permissions: {
+                dev: false,
+                client: ['SendMessages', 'ViewChannel', 'EmbedLinks'],
+                user: [],
+            },
+            slashCommand: true,
+            options: [
+                {
+                    name: 'song',
+                    description: 'The song you want to search',
+                    type: 3,
+                    required: true,
+                },
+            ],
+        });
+    }
+    async run(ctx, args) {
+        const client = ctx.client;
+        const embed = client.embed();
+        let player = client.queue.get(ctx.guild.id);
+        const query = args.join(' ');
+        if (!player) {
+            const vc = ctx.member;
+            player = await client.queue.create(ctx.guild, vc.voice.channel, ctx.channel, client.shoukaku.getNode());
+        }
+        const res = await this.client.queue.search(query);
+        if (!res)
+            return await ctx.sendMessage({
+                embeds: [embed.setDescription(`**No results found**`)],
+            });
+        const row = new ActionRowBuilder().addComponents(new ButtonBuilder().setCustomId('1').setLabel('1').setStyle(ButtonStyle.Primary), new ButtonBuilder().setCustomId('2').setLabel('2').setStyle(ButtonStyle.Primary), new ButtonBuilder().setCustomId('3').setLabel('3').setStyle(ButtonStyle.Primary), new ButtonBuilder().setCustomId('4').setLabel('4').setStyle(ButtonStyle.Primary), new ButtonBuilder().setCustomId('5').setLabel('5').setStyle(ButtonStyle.Primary));
+        
+        const row2 = new ActionRowBuilder().addComponents(new ButtonBuilder().setCustomId('6').setLabel('6').setStyle(ButtonStyle.Primary),new ButtonBuilder().setCustomId('7').setLabel('7').setStyle(ButtonStyle.Primary),new ButtonBuilder().setCustomId('8').setLabel('8').setStyle(ButtonStyle.Primary),new ButtonBuilder().setCustomId('9').setLabel('9').setStyle(ButtonStyle.Primary),new ButtonBuilder().setCustomId('10').setLabel('10').setStyle(ButtonStyle.Primary));
+        switch (res.loadType) {
+            case 'LOAD_FAILED':
+                ctx.sendMessage({
+                    embeds: [
+                        embed
+                            .setDescription('There was an error while searching.'),
+                    ],
+                });
+                break;
+            case 'NO_MATCHES':
+                ctx.sendMessage({
+                    embeds: [
+                        embed
+                            .setDescription('There were no results found.'),
+                    ],
+                });
+                break;
+            case 'SEARCH_RESULT': {
+                const tracks = res.tracks.slice(0, 10);
+                const embeds = tracks.map((track, index) => `${index + 1}. [${track.info.title}](${track.info.uri}) - \`${track.info.author}\``);
+                await ctx.sendDeferMessage({
+                    embeds: [embed.setDescription(embeds.join('\n'))],
+                    components: [row,row2],
+                });
+                break;
+            }
+        }
+        const collector = ctx.channel.createMessageComponentCollector({
+            filter: (f) => (f.user.id === ctx.author.id ? true : false && f.deferUpdate()),
+            max: 1,
+            time: 60000,
+            idle: 60000 / 2,
+        });
+        collector.on('collect', async (int) => {
+            for (let i = 0; i < res.tracks.length; i++) {
+                if (int.customId === `${i + 1}`) {
+                    let track = res.tracks[i];
+                    track = player.buildTrack(track, ctx.author);
+                    player.queue.push(track);
+                    player.isPlaying();
+                    await ctx.editMessage({
+                        embeds: [
+                            embed.setDescription(`Added [${track.info.title}](${client.config.topggUri}) to the queue`),
+                        ],
+                        components: [],
+                    });
+                }
+            }
+            return int.deferUpdate();
+        });
+        collector.on('end', async () => {
+            await ctx.editMessage({ components: [] });
+        });
+    }
+}
+
+
+module.exports = Search;

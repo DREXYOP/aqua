@@ -1,21 +1,22 @@
 const Command = require('../../structures/Command');
 
-class Resume extends Command {
+
+class Shuffle extends Command {
     constructor(client) {
         super(client, {
-            name: 'resume',
+            name: 'shuffle',
             description: {
-                content: 'Resumes the current song',
-                examples: ['resume'],
-                usage: 'resume',
+                content: 'Shuffles the queue',
+                examples: ['shuffle'],
+                usage: 'shuffle',
             },
             category: 'Music',
-            aliases: ['r'],
+            aliases: ['sh'],
             cooldown: 3,
             args: false,
             player: {
                 voice: true,
-                dj: false,
+                dj: true,
                 active: true,
                 djPerm: null,
             },
@@ -28,30 +29,23 @@ class Resume extends Command {
             options: [],
         });
     }
-    async run(ctx) {
+    async run( ctx) {
         const client = ctx.client;
         const player = client.queue.get(ctx.guild.id);
         const embed = this.client.embed();
-        if (!player.paused)
+        if (!player.queue.length)
             return await ctx.sendMessage({
                 embeds: [
                     embed
-                        .setAuthor({
-                            name: `${this.name}`,
-                            iconURL: `${this.client.user?.avatarURL()}`
-                        })
-                        .setDescription('The player is not paused.'),
+                        .setDescription('There are no songs in the queue.'),
                 ],
             });
-        player.pause();
+        player.setShuffle(true);
         return await ctx.sendMessage({
-            embeds: [embed.setDescription(`Resumed the player`).setAuthor({
-                name: `${this.name}`,
-                iconURL: `${this.client.user?.avatarURL()}`
-            })],
+            embeds: [embed.setDescription(`Shuffled the queue`)],
         });
     }
 }
 
 
-module.exports = Resume;
+module.exports = Shuffle;

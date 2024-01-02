@@ -8,8 +8,8 @@ module.exports = class Help extends Command {
             name: 'help',
             description: {
                 content: 'Displays all the commands of the bot.',
-                usage: '{prefix}help',
-                examples: ['a!help'],
+                usage: 'help',
+                examples: ['help','help <command>'],
             },
             aliases: ['h'],
             category: 'Misc',

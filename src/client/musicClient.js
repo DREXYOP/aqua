@@ -19,6 +19,7 @@ class musicClient extends Shoukaku{
         this.on('disconnect', (name, players, moved) => {
             if (moved) this.emit('playerMove', players);
             this.client.shoukaku.emit('nodeDisconnect', name, players);
+            
         });
 
         this.on('debug', (name, reason) => this.client.shoukaku.emit('nodeRaw', name, reason));

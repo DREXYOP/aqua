@@ -9,7 +9,7 @@ class Pause extends Command {
                 examples: ['pause'],
                 usage: 'pause',
             },
-            category: 'music',
+            category: 'Music',
             aliases: [],
             cooldown: 3,
             args: false,
