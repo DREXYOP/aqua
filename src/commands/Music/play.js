@@ -44,6 +44,13 @@ class Play extends Command {
     async run(ctx, args) {
         this.client = ctx.client;
         const query = args.join(' ');
+        if(!query){
+            return ctx.sendMessage({
+                        embeds:[
+                            ctx.client.embed().setDescription('Please provide a song name or url.')
+                        ]
+                    })
+        }
         let player = ctx.client.queue.get(ctx.guild.id);
         const vc = ctx.member;
         

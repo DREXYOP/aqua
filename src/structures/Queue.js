@@ -56,15 +56,13 @@ class Queue extends Map {
     }
 
     async search(query) {
-        const regex = /^https?:\/\//;
+        const regex = /^https?:\/\//i;
         let result;
         const node = this.client.shoukaku.getNode();
         try {
-            result = await node.rest.resolve(
-                regex.test(query) ? query : `${this.client.config.searchEngine}:${query}`
-            );
+            result = await node.rest.resolve(regex.test(query) ? query : `${this.client.config.searchEngine}:${query}`);
         } catch (err) {
-            return null;
+            return console.log(err);
         }
 
         return result;
