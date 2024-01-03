@@ -6,7 +6,7 @@ class Skipto extends Command {
             name: 'skipto',
             description: {
                 content: 'Skips to a specific song in the queue',
-                examples: ['skipto 3'],
+                examples: ['skipto 5'],
                 usage: 'skipto <number>',
             },
             category: 'Music',
