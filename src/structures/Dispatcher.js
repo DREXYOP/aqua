@@ -113,7 +113,7 @@ class Dispatcher {
         this.history = [];
         this.player.connection.disconnect();
         this.client.queue.delete(this.guildId);
-        this.client.shoukaku.emit('playerDestroy', this.player);
+        this.client.shoukaku.emit('playerDestroy', this.player ,this);
     }
     setShuffle(shuffle) {
         if (!this.player)

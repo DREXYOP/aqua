@@ -46,13 +46,13 @@ module.exports = {
             iconURL: this.client.user.displayAvatarURL({ extension: 'png' }),
         })
             .setColor(this.client.color)
-            .setDescription(`**[${track.info.title}](${track.info.uri})**`)
+            .setDescription(`**[${track.info.title}](${this.client.config.topggUri})**`)
             .setFooter({
-            text: `Requested by ${track.info.requester.tag}`,
+            text: `Made with ❤️, consider voting the bot.`,
             iconURL: track.info.requester.avatarURL({}),
         })
             .setThumbnail(track.info.thumbnail)
-            .addFields({
+            .addFields({name: `Requester`,value:`<@${track.info.requester.id}>`,inline: true},{
             name: 'Duration',
             value: track.info.isStream
                 ? 'LIVE'

@@ -10,7 +10,7 @@ class Join extends Command {
                 usage: 'join',
             },
             category: 'Music',
-            aliases: ['j'],
+            aliases: ['j','join'],
             cooldown: 3,
             args: false,
             player: {

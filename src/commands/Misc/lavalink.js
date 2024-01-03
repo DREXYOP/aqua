@@ -32,6 +32,7 @@ class LavaLink extends Command {
         const embed = ctx.client.embed();
         embed.setTitle('Lavalink Stats');
         embed.setThumbnail(ctx.client.user.avatarURL({}));
+        embed.setFooter({text:`${ctx.author.username}`, iconURL:ctx.author.avatarURL()});
         embed.setTimestamp();
 
         ctx.client.shoukaku.nodes.forEach((node) => {

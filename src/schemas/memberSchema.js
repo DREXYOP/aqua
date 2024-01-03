@@ -1,5 +1,4 @@
-const mongoose = require('mongoose')
-const {prefix} = require("../config.json")
+const mongoose = require('mongoose');
 
 const Options = {
     memberId: { type: String } 

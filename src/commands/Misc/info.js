@@ -54,8 +54,8 @@ class Info extends Command {
 - **Uptime**: ${this.client.utils.formatTime(osUptime)}
 - **CPU Architecture**: ${cpuArch} (${cpuCores} cores)
 - **Memory Usage**: ${this.client.utils.formatBytes(usedMem)} / ${this.client.utils.formatBytes(totalMem)} (${Math.round((usedMem / totalMem) * 100)}%)
-- **Node Version**: ${nodeVersion}
-- **Discord Version**: ${discordJsVersion}
+- **Shards** - ${ctx.client.shard.count}
+- **Shard ID** - ${ctx.guild.shard.id}
 - **Cached** ${botGuilds} guilds, ${botChannels} channels, and ${botUsers} users
 - **Total Commands**: ${botCommands}
   `;
@@ -68,7 +68,8 @@ class Info extends Command {
                 name: `${this.client.user.username}`,
                 iconURL: `${this.client.user.avatarURL()}`
             })
-            .setTimestamp().setTitle('Bot Information:')],
+            .setTimestamp().setTitle('Bot Information:').setFooter({text:`${ctx.author.username}`, iconURL:ctx.author.avatarURL()})
+            .setTimestamp()],
         });
     }
 }

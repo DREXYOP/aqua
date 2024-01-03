@@ -1,4 +1,5 @@
 const Command = require("../../structures/Command.js");
+const { ActionRowBuilder,ButtonBuilder,ButtonStyle} = require('discord.js');
 
 
 module.exports = class Ping extends Command {
@@ -29,7 +30,24 @@ module.exports = class Ping extends Command {
         });
     }
     async run(ctx, args) {
+        const row = new ActionRowBuilder().addComponents(
+            new ButtonBuilder()
+                .setLabel(`Get ${this.client.user?.username}`)
+                .setStyle(ButtonStyle.Link)
+                .setURL(`https://discord.com/api/oauth2/authorize?client_id=${this.client.user?.id}&permissions=${this.client.config.inv_perms}&scope=bot%20applications.commands`),
+            new ButtonBuilder()
+                .setLabel('Support Server')
+                .setStyle(ButtonStyle.Link)
+                .setURL(`${this.client.config.supportUri}`),
+            new ButtonBuilder()
+                .setLabel('Vote Me')
+                .setStyle(ButtonStyle.Link)
+                .setURL(`${this.client.config.topggUri}`)
+        );
         const msg = await ctx.sendDeferMessage('Pinging...');
-        return await ctx.editMessage(`API Latency is: \`${Math.round(ctx.ping)}ms.\``);
+        return await ctx.editMessage({
+            content:`API Latency is: \`${Math.round(ctx.ping)}ms.\``,
+            components:[row]
+        });
     }
 };

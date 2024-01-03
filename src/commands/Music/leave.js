@@ -10,7 +10,7 @@ class Leave extends Command {
                 usage: 'leave',
             },
             category: 'Music',
-            aliases: ['dc'],
+            aliases: ['dc','disconnect'],
             cooldown: 3,
             args: false,
             player: {

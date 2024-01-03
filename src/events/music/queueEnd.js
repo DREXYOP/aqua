@@ -18,6 +18,16 @@ module.exports = {
             dispatcher.previous = dispatcher.current;
             dispatcher.current = null;
         }
+        setTimeout(async () => {
+            const playerVoiceChannel = (client.guilds.cache.get(player.connection.guildId)).channels.cache.get(dispatcher.channelId);
+            if (player &&
+                playerVoiceChannel &&
+                playerVoiceChannel.members.filter((x) => !x.user.bot).size <= 0) {
+                if (player) {
 
+                    player.destroy();
+                }
+            }
+        }, 5000);
     }
 }

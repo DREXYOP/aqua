@@ -36,7 +36,7 @@ module.exports = {
             player.pause();
         if (newState.id === client.user.id && !newState.serverMute && player.paused)
             player.pause();
-        let voiceChannel = newState.guild.channels.cache.get(player.player.connection.channelId);
+        const voiceChannel = newState.guild.channels.cache.get(player.player.connection.channelId);
         if (newState.id === client.user.id && newState.channelId === null)
             return;
         if (!voiceChannel)
@@ -52,6 +52,7 @@ module.exports = {
                     playerVoiceChannel &&
                     playerVoiceChannel.members.filter((x) => !x.user.bot).size <= 0) {
                     if (player) {
+
                         player.destroy();
                     }
                 }

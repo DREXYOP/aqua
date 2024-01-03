@@ -48,7 +48,8 @@ module.exports = class Ping extends Command {
                         name: `${this.client.user?.username}`,
                         iconURL: `${this.client.user?.avatarURL()}`
                     })
-                    .setDescription(`You can invite me by clicking the button below. Any bugs or outages? Join the support server!`),
+                    .setDescription(`You can invite me by clicking the button below. Any bugs or outages? Join the support server!`).setFooter({text:`${ctx.author.username}`, iconURL:ctx.author.avatarURL()})
+                    .setTimestamp(),
             ],
             components: [row],
         });
