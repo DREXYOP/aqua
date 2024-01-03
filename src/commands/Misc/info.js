@@ -1,8 +1,7 @@
 const { version } = require('discord.js');
 const os = require('os');
-const byteSize = require('byte-size')
 const Command = require("../../structures/Command.js");
-
+const { ActionRowBuilder,ButtonBuilder,ButtonStyle } = require('discord.js')
 
 class Info extends Command {
     constructor(client) {
@@ -33,6 +32,20 @@ class Info extends Command {
         });
     }
     async run(ctx) {
+        const row = new ActionRowBuilder().addComponents(
+            new ButtonBuilder()
+                .setLabel(`Get ${this.client.user?.username}`)
+                .setStyle(ButtonStyle.Link)
+                .setURL(`https://discord.com/api/oauth2/authorize?client_id=${this.client.user?.id}&permissions=8&scope=bot%20applications.commands`),
+            new ButtonBuilder()
+                .setLabel('Support Server')
+                .setStyle(ButtonStyle.Link)
+                .setURL(`${this.client.config.supportUri}`),
+            new ButtonBuilder()
+                .setLabel('Vote Me')
+                .setStyle(ButtonStyle.Link)
+                .setURL(`${this.client.config.topggUri}`)
+        );
         const osType = os.type();
         const osRelease = os.release();
         const osUptime = os.uptime();
@@ -70,6 +83,7 @@ class Info extends Command {
             })
             .setTimestamp().setTitle('Bot Information:').setFooter({text:`${ctx.author.username}`, iconURL:ctx.author.avatarURL()})
             .setTimestamp()],
+            components:[row]
         });
     }
 }

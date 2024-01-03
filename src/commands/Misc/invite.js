@@ -38,7 +38,11 @@ module.exports = class Ping extends Command {
             new ButtonBuilder()
                 .setLabel('Support Server')
                 .setStyle(ButtonStyle.Link)
-                .setURL(`${this.client.config.supportUri}`)
+                .setURL(`${this.client.config.supportUri}`),
+            new ButtonBuilder()
+                .setLabel('Vote Me')
+                .setStyle(ButtonStyle.Link)
+                .setURL(`${this.client.config.topggUri}`)
         );
 
         return await ctx.sendMessage({

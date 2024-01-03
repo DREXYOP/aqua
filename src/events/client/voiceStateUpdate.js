@@ -1,4 +1,5 @@
 const { ChannelType } = require('discord.js');
+const _247 = require('../../schemas/_247');
 
 module.exports = {
     name: 'voiceStateUpdate',
@@ -46,17 +47,21 @@ module.exports = {
             //     where: { guildId: newState.guild.id },
             // });
             // if (!server) {
-            setTimeout(async () => {
-                const playerVoiceChannel = newState.guild.channels.cache.get(player.player.connection.channelId);
-                if (player &&
-                    playerVoiceChannel &&
-                    playerVoiceChannel.members.filter((x) => !x.user.bot).size <= 0) {
-                    if (player) {
-
-                        player.destroy();
+            const stay = _247.findOne({guildId:newState.guild.id});
+            if(!stay){
+                setTimeout(async () => {
+                    const playerVoiceChannel = newState.guild.channels.cache.get(player.player.connection.channelId);
+                    if (player &&
+                        playerVoiceChannel &&
+                        playerVoiceChannel.members.filter((x) => !x.user.bot).size <= 0) {
+                        if (player) {
+    
+                            player.destroy();
+                        }
                     }
-                }
-            }, 5000);
+                }, 5000);
+            }
+            
             // } else {
             //     if (server)
             //         return;

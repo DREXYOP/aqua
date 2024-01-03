@@ -37,7 +37,7 @@ class BassBoost extends Command {
                 embeds: [
                     {
                         description: 'Bassboost filter has been disabled',
-                        color: client.color.main,
+                        color: client.color,
                     },
                 ],
             });
@@ -54,7 +54,7 @@ class BassBoost extends Command {
                 embeds: [
                     {
                         description: 'Bassboost filter has been enabled',
-                        color: client.color.main,
+                        color: client.color,
                     },
                 ],
             });

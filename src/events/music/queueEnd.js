@@ -1,7 +1,8 @@
 module.exports = {
     name:'queueEnd',
     async run(client, player, track, dispatcher) {
-        const guild = client.guilds.cache.get(dispatcher.guildId);
+        const guild = client.guilds.cache.get(dispatcher.guildId)
+        const player1 = client.queue.get(dispatcher.guildId);
         if (!guild) return;
         // const channel = guild.channels.cache.get()
 
@@ -19,15 +20,7 @@ module.exports = {
             dispatcher.current = null;
         }
         setTimeout(async () => {
-            const playerVoiceChannel = (client.guilds.cache.get(player.connection.guildId)).channels.cache.get(dispatcher.channelId);
-            if (player &&
-                playerVoiceChannel &&
-                playerVoiceChannel.members.filter((x) => !x.user.bot).size <= 0) {
-                if (player) {
-
-                    player.destroy();
-                }
-            }
+            player1.destroy();
         }, 5000);
     }
 }
