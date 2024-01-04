@@ -7,8 +7,8 @@ class Prefix extends Command {
             name: 'prefix',
             description: {
                 content: 'Shows the bot\'s prefix',
-                examples: ['prefix set', 'prefix reset', 'prefix set !'],
-                usage: '{prefix}prefix set, {prefix}prefix reset, {prefix}prefix set !',
+                examples: ['prefix', 'prefix reset', 'prefix set !'],
+                usage: 'prefix set, prefix reset, prefix set !',
             },
             category: 'Misc',
             aliases: ['prefix'],

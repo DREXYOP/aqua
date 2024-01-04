@@ -1,17 +1,17 @@
 const { ApplicationCommandOptionType } = require('discord.js');
 const Command = require('../../structures/Command');
 
-class Pitch extends Command {
+class Speed extends Command {
     constructor(client) {
         super(client, {
-            name: 'pitch',
+            name: 'speed',
             description: {
-                content: 'on/off the pitch filter',
-                examples: ['pitch 1'],
-                usage: 'pitch <number>',
+                content: 'Sets the speed of the song',
+                examples: ['speed 1.5'],
+                usage: 'speed <number>',
             },
             category: 'Filters',
-            aliases: ['ph'],
+            aliases: ['speed'],
             cooldown: 3,
             args: true,
             player: {
@@ -28,8 +28,8 @@ class Pitch extends Command {
             slashCommand: true,
             options: [
                 {
-                    name: 'number',
-                    description: 'The number you want to set the pitch to',
+                    name: 'speed',
+                    description: 'The speed you want to set',
                     type: ApplicationCommandOptionType.Integer,
                     required: true,
                 },
@@ -39,27 +39,26 @@ class Pitch extends Command {
     async run(ctx, args) {
         const player = ctx.client.queue.get(ctx.guild.id);
         const embed = ctx.client.embed();
-        const number = Number(args[0]);
-        if (isNaN(number))
+        const speed = Number(args[0]);
+        if (isNaN(speed))
             return await ctx.sendMessage({
                 embeds: [
                     embed.setDescription(`Please enter a valid number.`)
                 ],
             });
-        if (number > 5 || number < 1)
+        if (speed < 0.5 || speed > 5)
             return await ctx.sendMessage({
                 embeds: [
-                    embed.setDescription('Please provide a number between 1 and 5')
-                        
+                    embed.setDescription('Please provide a number between 0.5 and 5')
                 ],
             });
-        player.player.setTimescale({ pitch: number, rate: 1, speed: 1 });
+        player.player.setTimescale({ speed: speed });
         return await ctx.sendMessage({
             embeds: [
-                embed.setDescription(`Pitch has been set to ${number}`)
+                embed.setDescription(`speed has been set to ${speed}`)
             ],
         });
     }
 }
 
-module.exports = Pitch;
+module.exports = Speed;

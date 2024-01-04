@@ -1,5 +1,6 @@
+const prefixSchema = require("../../schemas/prefixSchema.js");
 const Command = require("../../structures/Command.js");
-const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js')
+const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 
 
 module.exports = class Help extends Command {
@@ -46,7 +47,10 @@ module.exports = class Help extends Command {
                 .setStyle(ButtonStyle.Link)
                 .setURL(`${this.client.config.topggUri}`)
         );
-        const prefix = this.client.prefix;
+        let prefix = await prefixSchema.findOne({guildId:ctx.guild.id});
+        if(!prefix){
+            prefix =  ctx.client.prefix;
+        }
         // const msg = await ctx.sendDeferMessage('Fetching all commands...');
         const commands = this.client.commands.filter(cmd => cmd.category !== 'dev');
         const categories = commands
@@ -79,6 +83,33 @@ module.exports = class Help extends Command {
                 });
             fildes.forEach(field => helpEmbed.addFields(field));
             ctx.sendMessage({ embeds: [helpEmbed], components:[row]});
+        }else {
+            const command = this.client.commands.get(args[0].toLowerCase());
+            if (!command)
+                return await ctx.sendMessage({
+                    embeds: [
+                        client
+                            .embed()
+                            .setDescription(`Command \`${args[0]}\` not found`),
+                    ],
+                });
+            const embed = this.client.embed();
+            const helpEmbed = embed
+                .setAuthor({name:`Help Menu - ${command.name}`,iconURL:ctx.client.user.avatarURL()}).setDescription(`**Description:** ${command.description.content}
+**Usage:** ${prefix}${command.description.usage}
+**Examples:** ${command.description.examples.map(example => `${prefix}${example}`).join(',\n ')}
+**Aliases:** ${command.aliases.map(alias => `\`${alias}\``).join(', ')}
+**Category:** ${command.category}
+**Cooldown:** ${command.cooldown} seconds
+**Permissions:** ${command.permissions.user.length > 0
+                        ? command.permissions.user.map(perm => `\`${perm}\``).join(', ')
+                        : 'None'}
+**Bot Permissions:** ${command.permissions.client.map(perm => `\`${perm}\``).join(', ')}
+**Slash Command:** ${command.slashCommand ? 'Yes' : 'No'}
+**Args:** ${command.args ? 'Yes' : 'No'}
+**Player:** ${command.player.active ? 'Yes' : 'No'}
+**Voice:** ${command.player.voice ? 'Yes' : 'No'}`);
+            ctx.sendMessage({ embeds: [helpEmbed],components:[row] });
         }
 
     }

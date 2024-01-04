@@ -1,16 +1,17 @@
 const Command = require("../../structures/Command.js");
-const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
+const { ActionRowBuilder,ButtonBuilder,ButtonStyle} = require('discord.js');
 
-module.exports = class Ping extends Command {
+
+module.exports = class Uptime extends Command {
     constructor(client) {
         super(client, {
-            name: 'invite',
+            name: 'uptime',
             description: {
-                content: 'Returns the invite link of the bot.',
-                usage: 'invite',
-                examples: ['invite'],
+                content: 'Shows the uptime of the bot',
+                usage: 'Uptime',
+                examples: ['Uptime'],
             },
-            aliases: ['inv'],
+            aliases: ['ut'],
             category: 'Misc',
             cooldown: 3,
             player: {
@@ -29,12 +30,11 @@ module.exports = class Ping extends Command {
         });
     }
     async run(ctx, args) {
-        const embed = this.client.embed();
         const row = new ActionRowBuilder().addComponents(
             new ButtonBuilder()
                 .setLabel(`Get ${this.client.user?.username}`)
                 .setStyle(ButtonStyle.Link)
-                .setURL(`https://discord.com/api/oauth2/authorize?client_id=${this.client.user?.id}&permissions=8&scope=bot%20applications.commands`),
+                .setURL(`https://discord.com/api/oauth2/authorize?client_id=${this.client.user?.id}&permissions=${this.client.config.inv_perms}&scope=bot%20applications.commands`),
             new ButtonBuilder()
                 .setLabel('Support Server')
                 .setStyle(ButtonStyle.Link)
@@ -44,18 +44,9 @@ module.exports = class Ping extends Command {
                 .setStyle(ButtonStyle.Link)
                 .setURL(`${this.client.config.topggUri}`)
         );
-
         return await ctx.sendMessage({
-            embeds: [
-                embed
-                    .setAuthor({
-                        name: `${this.client.user?.username}`,
-                        iconURL: `${this.client.user?.avatarURL()}`
-                    })
-                    .setDescription(`You can invite me by clicking the button below. Any bugs or outages? Join the support server!`).setFooter({text:`${ctx.author.username}`, iconURL:ctx.author.avatarURL()})
-                    .setTimestamp(),
-            ],
-            components: [row],
+            content:`I Am Online Since \`${ctx.client.utils.formatTime(ctx.client.uptime)}\``,
+            components:[row]
         });
     }
 };

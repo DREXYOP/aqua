@@ -9,7 +9,7 @@ class BassBoost extends Command {
                 examples: ['bassboost'],
                 usage: 'bassboost',
             },
-            category: 'filters',
+            category: 'Filters',
             aliases: ['bb'],
             cooldown: 3,
             args: false,

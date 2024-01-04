@@ -8,7 +8,7 @@ module.exports = class Ping extends Command {
             name: 'ping',
             description: {
                 content: 'Returns the latency of the bot.',
-                usage: '{prefix}ping',
+                usage: 'ping',
                 examples: ['ping'],
             },
             aliases: ['pong'],

@@ -9,7 +9,7 @@ class Reset extends Command {
                 examples: ['reset'],
                 usage: 'reset',
             },
-            category: 'filters',
+            category: 'Filters',
             aliases: ['reset'],
             cooldown: 3,
             args: false,

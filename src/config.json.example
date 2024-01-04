@@ -6,16 +6,16 @@
   "nodes": [
     {
       "name": "NODE_1",
-      "url":"n1.ll.darrennathanael.com:2269", 
-      "auth": "glasshost1984",
+      "url":"172.203.224.108:2333", 
+      "auth": "aqu@az_drex!y",
       "secure": false
     }
   ],
   "color": "#2AE5DE",
   "logs":false,
-  "searchEngine": "ytsearch",
-  "maxQueueSize":10,
-  "maxPlaylistSize":15,
+  "searchEngine": "spsearch",
+  "maxQueueSize":100,
+  "maxPlaylistSize":100,
   "topggUri":"https://top.gg/bot/777165206203007017/vote",
   "clientID":"985530826429190175",
   "supportUri":"https://discord.gg/aqua-music-support-842773814290022490",
