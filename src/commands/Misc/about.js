@@ -1,7 +1,7 @@
 
 const os = require('os');
 const Command = require("../../structures/Command.js");
-const { ActionRowBuilder,ButtonBuilder,ButtonStyle } = require('discord.js')
+const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js')
 
 class About extends Command {
     constructor(client) {
@@ -32,9 +32,9 @@ class About extends Command {
         });
     }
     async run(ctx) {
-    //    const tguilds = ctx.client.shard.fetchClientValues('guilds.cache.size').then(results => {
-	// 	results.reduce((acc, guildCount) => acc + guildCount, 0)
-	// }).catch(console.error);
+        //    const tguilds = ctx.client.shard.fetchClientValues('guilds.cache.size').then(results => {
+        // 	results.reduce((acc, guildCount) => acc + guildCount, 0)
+        // }).catch(console.error);
         const row = new ActionRowBuilder().addComponents(
             new ButtonBuilder()
                 .setLabel(`Get ${this.client.user?.username}`)
@@ -49,9 +49,9 @@ class About extends Command {
                 .setStyle(ButtonStyle.Link)
                 .setURL(`${this.client.config.topggUri}`)
         );
-       
+
         const osUptime = ctx.client.uptime;
-      
+
         const totalMem = os.totalmem();
         const freeMem = os.freemem();
         const usedMem = totalMem - freeMem;
@@ -75,9 +75,9 @@ class About extends Command {
                 name: `${this.client.user.username}`,
                 iconURL: `${this.client.user.avatarURL()}`
             })
-            .setTimestamp().setTitle('Bot Information:').setFooter({text:`${ctx.author.username}`, iconURL:ctx.author.avatarURL()})
-            .setTimestamp()],
-            components:[row]
+                .setTimestamp().setTitle('Bot Information:').setFooter({ text: `${ctx.author.username}`, iconURL: ctx.author.avatarURL() })
+                .setTimestamp()],
+            components: [row]
         });
     }
 }
