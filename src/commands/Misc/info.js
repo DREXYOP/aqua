@@ -73,12 +73,14 @@ class Info extends Command {
   `;
         const embed = this.client.embed();
         return await ctx.sendMessage({
-            embeds: [embed.setDescription(botInfo).setFooter({
-                text: `thanks for choosing ${this.client.user.username}`,
-                iconURL: `${this.client.user.avatarURL()}`
-            }).setAuthor({
-                name: `${this.client.user.username}`,
-                iconURL: `${this.client.user.avatarURL()}`
+            embeds: [embed.setDescription(botInfo)
+            //     .setFooter({
+            //     text: `thanks for choosing ${this.client.user.username}`,
+            //     iconURL: `${this.client.user.avatarURL()}`
+            // })
+            .setAuthor({
+                name: `${this.client.user.username} | Info`,
+                iconURL: `${ctx.author.avatarURL()}`
             })
             .setTimestamp().setTitle('Bot Information:').setFooter({text:`${ctx.author.username}`, iconURL:ctx.author.avatarURL()})
             .setTimestamp()],

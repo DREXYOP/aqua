@@ -77,11 +77,10 @@ module.exports = class Help extends Command {
                 });
             });
             const helpEmbed = embed
-                .setTitle('Help Menu')
                 .setThumbnail(`${this.client.user?.avatarURL()}`)
                 .setAuthor({
-                    name: `${this.client.user?.username}`,
-                    iconURL: `${this.client.user?.avatarURL()}`
+                    name: `${this.client.user?.username} | ${this.name}`,
+                    iconURL: `${ctx.author.avatarURL()}`
                 })
                 .setTimestamp()
                 .setDescription(`Hey It's Me ${this.client.user?.username} a Versatile Music Bot With The Crisp of Awesome Music Quality With Over Powered Features`)
@@ -103,7 +102,7 @@ module.exports = class Help extends Command {
                 });
             const embed = this.client.embed();
             const helpEmbed = embed
-                .setAuthor({name:`Help Menu - ${command.name}`,iconURL:ctx.client.user.avatarURL()}).setDescription(`**Description:** ${command.description.content}
+                .setAuthor({name:`Help Menu - ${command.name}`,iconURL:ctx.author.avatarURL()}).setDescription(`${command.description.content}
 **Usage:** ${prefix}${command.description.usage}
 **Examples:** ${command.description.examples.map(example => `${prefix}${example}`).join(',\n ')}
 **Aliases:** ${command.aliases.map(alias => `\`${alias}\``).join(', ')}

@@ -98,7 +98,7 @@ class Play extends Command {
                 ctx.sendMessage({
                     embeds: [
                         embed
-                            .setDescription(`Added [${res.tracks[0].info.title}](${ctx.client.config.topggUri}) to the queue.`),
+                            .setDescription(`Added [${res.tracks[0].info.title}](${ctx.client.config.topggUri}) to the queue. \n requested by - [<@${ctx.author.id}>]`),
                     ],
                 });
                 break;
@@ -144,7 +144,7 @@ class Play extends Command {
                 ctx.sendMessage({
                     embeds: [
                         embed
-                            .setDescription(`Added [${res.tracks[0].info.title}](${ctx.client.config.topggUri}) to the queue. \n Requested by <@${ctx.author.id}>`),
+                            .setDescription(`Added [${res.tracks[0].info.title}](${ctx.client.config.topggUri}) to the queue. \n Requested by - <@${ctx.author.id}>`),
                     ],
                 });
                 break;

@@ -63,17 +63,16 @@ class About extends Command {
 - **Developer**: [Drexy_xD#0](https://discord.com/users/983787597627273267)
 - **Supporters**: [Indie Hq](https://discord.gg/jSnApadHJa)
 - **Uptime**: ${this.client.utils.formatTime(osUptime)}
-- **Credits**: This src is built by Drexy_xD with help from Indie Hq and other devs, a big thanks to all the devs who supported me make this src , some parts of this src are inspired from [brblacky/lavamusic](https://github.com/brblacky/lavamusic), there was no copying of code from any source which didn't allow it , the src was built totally with opensource pagkages along with some custom packages by the team. 
 - **Total Commands**: ${botCommands}
   `;
         const embed = this.client.embed();
         return await ctx.sendMessage({
-            embeds: [embed.setDescription(botInfo).setFooter({
+            embeds: [embed.setDescription(`Hey, I am <@${ctx.client.user.id}>\n One of the best music bot with features like autoplay, 24/7, filters, multiple sources ect. \n\n- **Developer**: [Drexy_xD](https://discord.com/users/983787597627273267)\n- **Supporters**: [Indie Hq](https://discord.gg/jSnApadHJa)\n- **Uptime**: ${this.client.utils.formatTime(osUptime)}\n- **Total Commands**: ${botCommands}`).setFooter({
                 text: `thanks for choosing ${this.client.user.username}`,
                 iconURL: `${this.client.user.avatarURL()}`
             }).setAuthor({
-                name: `${this.client.user.username}`,
-                iconURL: `${this.client.user.avatarURL()}`
+                name: `${this.client.user.username} | About`,
+                iconURL: `${ctx.author.avatarURL()}`
             })
                 .setTimestamp().setTitle('Bot Information:').setFooter({ text: `${ctx.author.username}`, iconURL: ctx.author.avatarURL() })
                 .setTimestamp()],
