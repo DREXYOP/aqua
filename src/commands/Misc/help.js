@@ -28,6 +28,14 @@ module.exports = class Help extends Command {
                 voteRequired: false,
             },
             slashCommand: true,
+            options: [
+                {
+                    name: 'command',
+                    description: 'any command you want help with',
+                    type: 3,
+                    required: false,
+                },
+            ],
         });
     }
     async run(ctx, args) {
@@ -88,7 +96,7 @@ module.exports = class Help extends Command {
             if (!command)
                 return await ctx.sendMessage({
                     embeds: [
-                        client
+                        this.client
                             .embed()
                             .setDescription(`Command \`${args[0]}\` not found`),
                     ],
