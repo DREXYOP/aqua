@@ -43,7 +43,7 @@ module.exports = class aquaClient extends BaseClient {
     };
     
 
-    embed() {
+    embed(ctx) {
         return new EmbedBuilder().setColor(`${this.config.color}`).setAuthor({name:`${this.user.username}`, iconURL: ctx? ctx.author.avatarURL():this.user.avatarURL()}).setFooter({text:`Made with ❤️ by Drexy_xD`, iconURL:this.user.avatarURL()}).setTimestamp();
       }
     
