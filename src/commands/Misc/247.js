@@ -31,7 +31,6 @@ module.exports = class _247 extends Command {
     async run(ctx) {
         const embed = ctx.client.embed();
         const data = await _247Schema.findOne({ guildId: ctx.guild.id });
-        console.log(data);
         if(!data){
             const newData = {
                 guildId: ctx.guild.id,

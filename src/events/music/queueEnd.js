@@ -1,3 +1,5 @@
+const _247 = require("../../schemas/_247");
+
 module.exports = {
     name:'queueEnd',
     async run(client, player, track, dispatcher) {
@@ -19,8 +21,17 @@ module.exports = {
             dispatcher.previous = dispatcher.current;
             dispatcher.current = null;
         }
-        setTimeout(async () => {
-            player1.destroy();
-        }, 5000);
+        const stay = _247.findOne({guildId:guild.id});
+       
+        if(!stay){
+            setTimeout(async () => {
+                player1.destroy();
+                const channel = guild.channels.cache.get(dispatcher.channelId);
+                const embed = client.embed()
+                channel.send({
+                    embeds:[embed.setDescription('Left the voice channel and destroyed the player, want me to be 24/7 in vc then enable 24/7 mode.').setAuthor({name: `Queue Ended`,iconURL: `${client.user?.avatarURL()}`})]
+                })
+            }, 5000);
+        }
     }
 }

@@ -39,7 +39,7 @@ class Stop extends Command {
                 embed
                     .setDescription(`Stopped the music and cleared the queue`)
                     .setAuthor({
-                        name: `Skip`,
+                        name: `Stop`,
                         iconURL: `${this.client.user?.avatarURL()}`
                     })
             ],

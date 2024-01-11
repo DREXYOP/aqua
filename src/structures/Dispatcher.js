@@ -162,7 +162,7 @@ class Dispatcher {
             return;
         
         this.destroy();
-        this.client.shoukaku.emit('playerDestroy', this.player);
+        // this.client.shoukaku.emit('playerDestroy', this.player);
     }
     setLoop(loop) {
         this.loop = loop;

@@ -54,8 +54,7 @@ module.exports = {
                     if (player &&
                         playerVoiceChannel &&
                         playerVoiceChannel.members.filter((x) => !x.user.bot).size <= 0) {
-                        if (player) {
-    
+                        if (player) {   
                             player.destroy();
                         }
                     }
