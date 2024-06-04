@@ -2,7 +2,7 @@
   "token":"",
   "owners": ["983787597627273267"],
   "prefix":"a!",
-  "db":"mongodb+srv://debadithya:debadithya@cluster0.pme4jf7.mongodb.net/aqua?retryWrites=true&w=majority",
+  "db":"",
   "nodes": [
     {
       "name": "NODE_1",
